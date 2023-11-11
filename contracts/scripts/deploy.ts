@@ -6,6 +6,12 @@ async function main() {
   await borrowYourCar.deployed();
 
   console.log(`BorrowYourCar deployed to ${borrowYourCar.address}`);
+
+  const CarToken = await ethers.getContractFactory("CarToken");
+  const carToken = await CarToken.deploy();
+  await carToken.deployed();
+
+  console.log(`CarToken deployed to ${carToken.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

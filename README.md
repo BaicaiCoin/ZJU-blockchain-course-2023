@@ -48,20 +48,63 @@
 
 ## 功能实现分析
 
-简单描述：项目完成了要求的哪些功能？每个功能具体是如何实现的？
+1. 连接账户和MetaMask钱包。
+2. 获取初始资金。在连接上账户后，调用carToken合约中的airdrop方法，然后展示余额。
+3. 查看自己拥有的汽车列表，基础信息包含汽车编号，拥有者，汽车图片，如果这辆汽车已被借用，则展示出借用者和借用到期日期。
+主要通过调用borrowYourCar合约中的getOwnedCar方法和getCarInfo方法，并在前端判断有没有借用者进行有选择地展示。
+4. 通过输入汽车编号查询车辆信息。先通过输入框读取想要查询的汽车，在通过borrowYourCar合约中的getCarInfo方法进行查询。
+5. 选择并借用某辆没被租用的车一段时间。在UborrowedPage页面在想要租用的车旁输入框输入想要借用的时间，然后通过borrowYourCar合约中的borrowCar方法实现租车。
+6. 使用自己发行的CarToken完成付费租赁汽车功能（这个虽然进行了代码实现，但出现了我无法解决的bug。在调用carToken合约的approve函数函数时，尽管参数正确，但无法出现理想结果，即没有弹出MetaMask窗口询问是否授权支付上限请求。尝试很多方法都无法找到问题来源）。
 
-建议分点列出。
 
 ## 项目运行截图
 
-放一些项目运行截图。
+初始页面：
+![image1.png](image1.png)
 
-项目运行成功的关键页面和流程截图。主要包括操作流程以及和区块链交互的截图。
+点击Connect Wallet按钮，弹出MetaMask窗口：
+![image2.png](image2.png)
+
+添加网络，点击“开始你的租车之旅”：
+![image3.png](image3.png)
+
+点击“点击领取初始资金”，这里因为之前已经点击过领取初始资金所以有余额，并且再次点击会出现已经领取过的提示：
+![image4.png](image4.png)
+
+点击“查看自己拥有的车”会显示出自己车的信息，如果有车被借出，则会显示借用者和借用时限：
+![image5.png](image5.png)
+
+回到主页，点击“查找车辆”，在查询车辆输入框中输入车编号：
+![image10.png](image10.png)
+
+回到主页，点击“查找所有空闲的车”：
+![image6.png](image6.png)
+
+在想要借的车旁输入时长的输入框中输入想要借用的时间，再点击确认：
+![image11.png](image11.png)
+
+如果借用自己的车则会弹出提示“你不能借自己的车！”：
+![image12.png](image12.png)
+
+借用其他空闲的车则不会出提示：
+![image7.png](image7.png)
+
+可以看到借用后这辆车在UnborrowedPage页面消失：
+![image8.png](image8.png)
+
+查询这辆车信息可以看到借用者和借用时限：
+![image9.png](image9.png)
+
+
+
+
 
 ## 参考内容
 
 - 课程的参考Demo见：[DEMOs](https://github.com/LBruyne/blockchain-course-demos)。
 
 - ERC-4907 [参考实现](https://eips.ethereum.org/EIPS/eip-4907)
+
+- ChatGPT 3.5
 
 如果有其它参考的内容，也请在这里陈列。
